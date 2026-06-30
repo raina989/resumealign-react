@@ -15,7 +15,7 @@ from .keyword_gap import extract_keywords, match_keywords_with_context, get_word
 
 # This runs when the module imports, so the model loads during container startup
 print("🔄 Loading Sentence Transformer model...")
-_model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
+_model = SentenceTransformer("all-MiniLM-L6-v2")
 print("✅ Model loaded successfully.")
 
 def get_model():
@@ -190,14 +190,14 @@ def calculate_detailed_match(resume_text, jd_text):
     similarity_score = calculate_similarity(resume_clean, jd_clean)
     
     # =================================================
-    # WEIGHTS
+    # WEIGHTS (Adjusted to prioritize skills and keywords)
     # =================================================
     weights = {
-    "skills": 0.50,
-    "experience": 0.20,
-    "keywords": 0.20,
-    "similarity": 0.10
-}
+        "skills": 0.50,
+        "experience": 0.20,
+        "keywords": 0.20,
+        "similarity": 0.10
+    }
     
     final_score = (
         skill_score * weights["skills"] +
