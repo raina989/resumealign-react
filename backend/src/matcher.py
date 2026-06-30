@@ -10,13 +10,17 @@ from .skill_gap import extract_skills
 from .keyword_gap import extract_keywords, match_keywords_with_context, get_word_stems, extract_phrases_from_text
 
 # =====================================================
-# LOAD SEMANTIC MODEL (LIGHTWEIGHT VERSION)
+# LOAD SEMANTIC MODEL (PRE-LOADED AT STARTUP)
 # =====================================================
 
+# This runs when the module imports, so the model loads during container startup
+print("🔄 Loading Sentence Transformer model...")
+_model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
+print("✅ Model loaded successfully.")
+
 def get_model():
-    """Loads and caches the model so it only downloads once."""
-    # Using smaller model to reduce memory usage on Render free tier
-    return SentenceTransformer("paraphrase-MiniLM-L3-v2")
+    """Returns the pre-loaded model"""
+    return _model
 
 # =====================================================
 # EXPERIENCE EXTRACTION
