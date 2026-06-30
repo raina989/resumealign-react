@@ -7,13 +7,10 @@ import traceback
 
 app = FastAPI()
 
-# CORS for React frontend (Vercel + local development)
+# CORS - Allow all origins (for testing)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://resumealign-react.vercel.app",  # Your Vercel frontend
-        "http://localhost:3000",                  # Local development
-    ],
+    allow_origins=["*"],  # Allow all origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,7 +39,6 @@ async def analyze(request: AnalyzeRequest):
             "interpretation": get_match_interpretation(result["overall"])
         }
     except Exception as e:
-        # Print full error to terminal for debugging
         print("=" * 50)
         print("ERROR IN ANALYZE ENDPOINT:")
         print(traceback.format_exc())
