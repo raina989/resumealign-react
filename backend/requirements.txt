@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sentence-transformers
+scikit-learn
+nltk
+pandas
+numpy
+pydantic
+python-multipart
