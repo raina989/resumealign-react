@@ -1,7 +1,7 @@
 // API service for communicating with backend
 import axios from 'axios';
 
-const API_BASE = 'https://resumealign-api-554385351006.us-central1.run.app';
+const API_BASE = 'https://resumealign-api-x6l6y27biq-uc.a.run.app';
 
 export const analyzeResume = async (resumeText, jdText) => {
   try {
