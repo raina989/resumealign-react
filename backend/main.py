@@ -1,14 +1,19 @@
+# backend/main.py
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from src.matcher import calculate_detailed_match, get_match_interpretation
+import traceback
 
 app = FastAPI()
 
-# CORS for React frontend
+# CORS for React frontend (Vercel + local development)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "https://resumealign-react.vercel.app",  # Your Vercel frontend
+        "http://localhost:3000",                  # Local development
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,4 +42,9 @@ async def analyze(request: AnalyzeRequest):
             "interpretation": get_match_interpretation(result["overall"])
         }
     except Exception as e:
+        # Print full error to terminal for debugging
+        print("=" * 50)
+        print("ERROR IN ANALYZE ENDPOINT:")
+        print(traceback.format_exc())
+        print("=" * 50)
         raise HTTPException(status_code=500, detail=str(e))
