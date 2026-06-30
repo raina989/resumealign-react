@@ -193,11 +193,11 @@ def calculate_detailed_match(resume_text, jd_text):
     # WEIGHTS
     # =================================================
     weights = {
-        "skills": 0.40,
-        "experience": 0.15,
-        "keywords": 0.15,
-        "similarity": 0.30
-    }
+    "skills": 0.50,
+    "experience": 0.20,
+    "keywords": 0.20,
+    "similarity": 0.10
+}
     
     final_score = (
         skill_score * weights["skills"] +
